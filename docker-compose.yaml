@@ -1,0 +1,61 @@
+version: '3'
+
+networks:
+  encoder:
+    driver: bridge
+
+volumes:
+  rabbitmq_data:
+
+services:
+  encoder:
+    container_name: encoder
+    hostname: encoder
+    restart: unless-stopped
+    build:
+      context: ./services/app
+      target: app
+    ports:
+      - "3000:3000"
+      - "8090:8090"
+    volumes:
+      - ~/.ssh:/root/.ssh:ro
+      - ./var:/var/www/api/var
+      - $MEDIA_PATH:/media
+    networks:
+      - encoder
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: "rabbitmq:management"
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    networks:
+      - encoder
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - ./services/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./services/rabbitmq/conf.d:/etc/rabbitmq/conf.d
+
+  worker:
+    container_name: worker
+    hostname: worker
+    restart: unless-stopped
+    build:
+      context: ./services/worker
+      target: app
+    volumes:
+      - ~/.ssh:/root/.ssh:ro
+      - ./var:/var/www/api/var
+      - $MEDIA_PATH:/media
+    networks:
+      - encoder
+    depends_on:
+      - rabbitmq
