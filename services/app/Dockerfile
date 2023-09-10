@@ -56,11 +56,11 @@ RUN --mount=type=cache,target=/usr/local/share/.cache/yarn/v6 \
 
 WORKDIR /var/www/api
 
-ENV SHA=af1949771e4f2860d079cd3b2e01cb0ac39af72f
+ENV SHA=8f75c196be788fcf8d9c6a90fe53cb6c1aa095b9
 RUN --mount=type=cache,target=/root/.cache/pip \
     git clone https://github.com/solitus0/encoder.git . && \
     git reset --hard $SHA && \
-    pipenv --python /usr/local/bin/python3 install
+    pipenv --python /usr/local/bin/python3 install .
 
 ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
