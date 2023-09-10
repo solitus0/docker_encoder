@@ -26,6 +26,8 @@ services:
       - encoder
     depends_on:
       - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
 
   rabbitmq:
     image: "rabbitmq:management"
