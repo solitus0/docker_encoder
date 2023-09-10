@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 networks:
   encoder:
@@ -28,6 +28,7 @@ services:
       - rabbitmq
     environment:
       - RABBITMQ_HOST=rabbitmq
+      - PIPENV_DONT_LOAD_ENV=1
 
   rabbitmq:
     image: "rabbitmq:management"
@@ -61,3 +62,6 @@ services:
       - encoder
     depends_on:
       - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - PIPENV_DONT_LOAD_ENV=1
