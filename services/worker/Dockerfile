@@ -38,7 +38,7 @@ RUN mkdir -p /var/www/app
 
 WORKDIR /var/www/app
 
-ENV SHA=013c40f72aa329964419a142d2132cebcf8a0df5
+ENV SHA=333696861dba7a5c00fc8e0e65d994610fcbdd54
 RUN --mount=type=cache,target=/root/.cache/pip \
     git clone https://github.com/solitus0/encoder_worker.git . && \
     git reset --hard $SHA && \
