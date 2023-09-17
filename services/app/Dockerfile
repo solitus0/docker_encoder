@@ -56,7 +56,7 @@ RUN --mount=type=cache,target=/usr/local/share/.cache/yarn/v6 \
 
 WORKDIR /var/www/api
 
-ENV SHA=53916360a92c01232a4c67c4bd9ec7f8d560d127
+ENV SHA=d545f94f49f876650df7199c1aa98ce173e6c21d
 RUN --mount=type=cache,target=/root/.cache/pip \
     git clone https://github.com/solitus0/encoder.git . && \
     git reset --hard $SHA && \
