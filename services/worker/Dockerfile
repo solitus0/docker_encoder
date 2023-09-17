@@ -38,11 +38,11 @@ RUN mkdir -p /var/www/app
 
 WORKDIR /var/www/app
 
-ENV SHA=35e9e4d9d2032996b6ce5ed5553bbac3d3fc9d82
+ENV SHA=013c40f72aa329964419a142d2132cebcf8a0df5
 RUN --mount=type=cache,target=/root/.cache/pip \
     git clone https://github.com/solitus0/encoder_worker.git . && \
     git reset --hard $SHA && \
-    pipenv --python /usr/local/bin/python3 install
+    pipenv --python /usr/local/bin/python3 install .
 
 ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
