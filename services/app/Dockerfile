@@ -45,7 +45,7 @@ RUN mkdir -p /var/www/api /var/www/app
 
 WORKDIR /var/www/app
 
-ENV SHA=139d0dc501ff3455041fa2fb4a1307eb6e3846fd
+ENV SHA=72784f7dd321ef3633d843be8619b99dfa110608
 RUN --mount=type=cache,target=/usr/local/share/.cache/yarn/v6 \
     git clone https://github.com/solitus0/encoder_frontend.git . && \
     git reset --hard $SHA && \
@@ -56,7 +56,7 @@ RUN --mount=type=cache,target=/usr/local/share/.cache/yarn/v6 \
 
 WORKDIR /var/www/api
 
-ENV SHA=c0fe92e8a926675d8401af9eccf24dc85e4bbe88
+ENV SHA=8a54ffc2634046e8a4fc1b1902fe688a95119702
 RUN --mount=type=cache,target=/root/.cache/pip \
     git clone https://github.com/solitus0/encoder.git . && \
     git reset --hard $SHA && \
